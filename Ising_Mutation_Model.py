@@ -81,6 +81,8 @@ for Cipro_ElRow in range(N):
             (np.exp(round((Cipro_Function[Cipro_ElRow][Cipro_ElCol]) / (N / 2), 2)) - 1)*(100/1.60)
 Cipro_Function = np.array(Cipro_Function)
 
+
+## Further adjustments to the antibiotic gradient.
 # Cipro_Func = [[0 for col in range(N)] for row in range(N)]
 # for Cipro_ElRow in range(N):
 #     Cipro_Func[Cipro_ElRow] = map(lambda i: i * (2/1.60), Cipro_Function[Cipro_ElRow])
