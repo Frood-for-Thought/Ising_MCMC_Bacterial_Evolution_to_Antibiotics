@@ -67,20 +67,19 @@ for Cipro_ElRow in range(N):
     for Cipro_ElCol in range(N):
         El_Col_Sum = Cipro_ElRow + Cipro_ElCol
         # Top Right Square
-        if El_Col_Sum >= (N + 1) and Cipro_ElCol > N / 2 >= Cipro_ElRow:
+        if El_Col_Sum >= (N - 1) and Cipro_ElCol > N / 2 >= Cipro_ElRow:
             Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (RowMax + 1 - Cipro_ElRow))
         # Lower Left Square
-        elif El_Col_Sum >= (N + 1) and Cipro_ElCol <= N / 2 < Cipro_ElRow:
+        elif El_Col_Sum >= (N - 1) and Cipro_ElCol <= N / 2 < Cipro_ElRow:
             Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((ColMax + 1 - Cipro_ElCol), (Cipro_ElRow - RowMax))
         # Lower Right Square
-        elif El_Col_Sum >= (N + 1) and Cipro_ElCol > N / 2 < Cipro_ElRow:
+        elif El_Col_Sum >= (N - 1) and Cipro_ElCol > N / 2 < Cipro_ElRow:
             Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (Cipro_ElRow - RowMax))
 for Cipro_ElRow in range(N):
     for Cipro_ElCol in range(N):
         Cipro_Function[Cipro_ElRow][Cipro_ElCol] = \
             (np.exp(round((Cipro_Function[Cipro_ElRow][Cipro_ElCol]) / (N / 2), 2)) - 1)*(100/1.60)
 Cipro_Function = np.array(Cipro_Function)
-
 
 # Cipro_Func = [[0 for col in range(N)] for row in range(N)]
 # for Cipro_ElRow in range(N):
