@@ -82,19 +82,19 @@ for Cipro_ElRow in range(N):
 Cipro_Function = np.array(Cipro_Function)
 
 
-Cipro_Func = [[0 for col in range(N)] for row in range(N)]
-for Cipro_ElRow in range(N):
-    Cipro_Func[Cipro_ElRow] = map(lambda i: i * (2/1.60), Cipro_Function[Cipro_ElRow])
-print(list(Cipro_Func[N-1]))
-exit()
-
-# # Show a figure of the Food and Cipro gradients
-# fig, axis = plt.subplots(1, 2)
-# im1 = axis[0].imshow(Food_Function)
-# axis[0].set_title("Food Gradient")
-# fig.colorbar(im1, ax=axis[0])
-# im2 = axis[1].imshow(Cipro_Function)
-# fig.colorbar(im2, ax=axis[1])
-# axis[1].set_title("Antibiotic Gradient")
-# plt.show()
+# Cipro_Func = [[0 for col in range(N)] for row in range(N)]
+# for Cipro_ElRow in range(N):
+#     Cipro_Func[Cipro_ElRow] = map(lambda i: i * (2/1.60), Cipro_Function[Cipro_ElRow])
+# print(list(Cipro_Func[N-1]))
 # exit()
+
+# Show a figure of the Food and Cipro gradients
+fig, axis = plt.subplots(1, 2)
+im1 = axis[0].imshow(Food_Function)
+axis[0].set_title("Food Gradient")
+fig.colorbar(im1, ax=axis[0])
+im2 = axis[1].imshow(Cipro_Function)
+fig.colorbar(im2, ax=axis[1])
+axis[1].set_title("Antibiotic Gradient")
+plt.show()
+exit()
