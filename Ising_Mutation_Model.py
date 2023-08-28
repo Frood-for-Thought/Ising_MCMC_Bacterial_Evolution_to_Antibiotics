@@ -31,15 +31,15 @@ spin[1][1] = 1
 
 # Reformat the array so that it is numpy friendly
 spin = np.array(spin)
-# print(spin)
 
-# FOOD GRID
-# Set up an array to contain the food gradient
-Food_Function = [[0 for col in range(N)] for row in range(N)]
 ColMax = int((N / 2) - 1)
 RowMax = int((N / 2) - 1)
 ColMin = 0
 RowMin = 0
+
+# FOOD GRID
+# Set up an array to contain the food gradient
+Food_Function = [[0 for col in range(N)] for row in range(N)]
 for Food_ElRow in range(N):
     for Food_ElCol in range(N):
         if Food_ElCol <= ColMax and Food_ElRow <= RowMax:
@@ -58,28 +58,24 @@ Food_Function = np.array(Food_Function)
 # CIPRO GRID (ANTIBIOTIC)
 # Set up an array to contain the cipro gradient
 Cipro_Function = [[0 for col in range(N)] for row in range(N)]
-ColMax = int(N / 2)
-RowMax = int(N / 2)
-ColMin = 0
-RowMin = 0
 El_Col_Sum = 0
 for Cipro_ElRow in range(N):
     for Cipro_ElCol in range(N):
         El_Col_Sum = Cipro_ElRow + Cipro_ElCol
         # Top Right Square
         if El_Col_Sum >= (N - 1) and Cipro_ElCol > N / 2 >= Cipro_ElRow:
-            Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (RowMax + 1 - Cipro_ElRow))
+            Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (Cipro_ElRow - RowMax))
         # Lower Left Square
         elif El_Col_Sum >= (N - 1) and Cipro_ElCol <= N / 2 < Cipro_ElRow:
-            Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((ColMax + 1 - Cipro_ElCol), (Cipro_ElRow - RowMax))
+            Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (Cipro_ElRow - RowMax))
         # Lower Right Square
         elif El_Col_Sum >= (N - 1) and Cipro_ElCol > N / 2 < Cipro_ElRow:
             Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (Cipro_ElRow - RowMax))
-for Cipro_ElRow in range(N):
-    for Cipro_ElCol in range(N):
-        Cipro_Function[Cipro_ElRow][Cipro_ElCol] = \
-            (np.exp(round((Cipro_Function[Cipro_ElRow][Cipro_ElCol]) / (N / 2), 2)) - 1)*(100/1.60)
-Cipro_Function = np.array(Cipro_Function)
+# for Cipro_ElRow in range(N):
+#     for Cipro_ElCol in range(N):
+#         Cipro_Function[Cipro_ElRow][Cipro_ElCol] = \
+#             (np.exp(round((Cipro_Function[Cipro_ElRow][Cipro_ElCol]) / (N / 2), 2)) - 1)*(100/1.60)
+# Cipro_Function = np.array(Cipro_Function)
 
 
 ## Further adjustments to the antibiotic gradient.
