@@ -71,16 +71,20 @@ for Cipro_ElRow in range(N):
         # Lower Right Square
         elif El_Col_Sum >= (N - 1) and Cipro_ElCol > N / 2 < Cipro_ElRow:
             Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (Cipro_ElRow - RowMax))
-for Cipro_ElRow in range(N):
-    for Cipro_ElCol in range(N):
-        Cipro_Function[Cipro_ElRow][Cipro_ElCol] = \
-            (np.exp(round((Cipro_Function[Cipro_ElRow][Cipro_ElCol]) / (N / 2), 2)) - 1)*(100/1.60)
+
+## Function to convert gradient to exponential
+# for Cipro_ElRow in range(N):
+#     for Cipro_ElCol in range(N):
+#         Cipro_Function[Cipro_ElRow][Cipro_ElCol] = \
+#             (np.exp(round((Cipro_Function[Cipro_ElRow][Cipro_ElCol]) / (N / 2), 2)) - 1)*(N/1.60)
 Cipro_Function = np.array(Cipro_Function)
 
 # Further adjustments to the antibiotic gradient.
 Cipro_Func = [[0 for col in range(N)] for row in range(N)]
 for Cipro_ElRow in range(N):
-    Cipro_Func[Cipro_ElRow] = map(lambda i: i * (2/1.60), Cipro_Function[Cipro_ElRow])
+    Cipro_Func[Cipro_ElRow] = list(map(lambda i: i * (2.115/(N/2)), Cipro_Function[Cipro_ElRow]))
+Cipro_Func = np.array(Cipro_Func)
+print(Cipro_Func)
 
 # Show a figure of the Food and Cipro gradients
 fig, axis = plt.subplots(1, 2)
