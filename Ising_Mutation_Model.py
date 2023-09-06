@@ -97,3 +97,10 @@ im2 = axis[1].imshow(Cipro_Func)
 fig.colorbar(im2, ax=axis[1])
 axis[1].set_title("Antibiotic Gradient")
 plt.show()
+
+#   INITIALIZE THE ITERATION LOOP
+# np.size(spin) counts the number of elements in the array "spin"
+spin_array_size = np.size(spin)
+print(f"The spin array has {spin_array_size} elements\n")
+numIters = 200 * spin_array_size
+
