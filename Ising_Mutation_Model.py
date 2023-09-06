@@ -50,10 +50,12 @@ for Food_ElRow in range(N):
             Food_Function[Food_ElRow][Food_ElCol] = max((ColMax + 1 - Food_ElCol), (Food_ElRow - RowMax))
         elif Food_ElCol > ColMax and Food_ElRow > RowMax:
             Food_Function[Food_ElRow][Food_ElCol] = max((Food_ElCol - ColMax), (Food_ElRow - RowMax))
-for Food_ElRow in range(N):
-    for Food_ElCol in range(N):
-        Food_Function[Food_ElRow][Food_ElCol] = 20 + 10 * (Food_Function[Food_ElRow][Food_ElCol] / (N / 2))
 Food_Function = np.array(Food_Function)
+# Further adjustments to the food gradient.
+Food_Func = [[0 for col in range(N)] for row in range(N)]
+for Food_ElRow in range(N):
+    Food_Func[Food_ElRow] = list(map(lambda i: 3 + i*(2/(N/2)), Food_Function[Food_ElRow]))
+Food_Func = np.array(Food_Func)
 
 # CIPRO GRID (ANTIBIOTIC)
 # Set up an array to contain the cipro gradient
@@ -88,10 +90,10 @@ print(Cipro_Func)
 
 # Show a figure of the Food and Cipro gradients
 fig, axis = plt.subplots(1, 2)
-im1 = axis[0].imshow(Food_Function)
+im1 = axis[0].imshow(Food_Func)
 axis[0].set_title("Food Gradient")
 fig.colorbar(im1, ax=axis[0])
-im2 = axis[1].imshow(Cipro_Function)
+im2 = axis[1].imshow(Cipro_Func)
 fig.colorbar(im2, ax=axis[1])
 axis[1].set_title("Antibiotic Gradient")
 plt.show()
