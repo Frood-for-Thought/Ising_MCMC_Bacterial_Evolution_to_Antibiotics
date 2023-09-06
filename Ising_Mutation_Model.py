@@ -119,7 +119,7 @@ print(f"The spin array has {spin_array_size} elements\n")
 numIters = 200 * spin_array_size
 
 # for curr_iter in range(numIters):
-# for curr_iter in range(200):
+for curr_iter in range(200):
 
     # Pick a random spin in the array "spin"
     linearIndex = np.random.randint(1, spin_array_size)
@@ -129,5 +129,5 @@ numIters = 200 * spin_array_size
     spin_pos = fnd_pos(spin, linearIndex)
     row = spin_pos[0]
     col = spin_pos[1]
-    # print(f"row = {row}")
-    # print(f"col = {col}")
+    print(f"row = {row}")
+    print(f"col = {col}")
