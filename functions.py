@@ -19,7 +19,7 @@ def fnd_pos(array, pos):
 # This algorithm determines the neighbouring spins next to the spin at the position selected and calculates
 # the necessary values for the energy equation.  It's made so that positions at the edges and corners are
 # not connected to the opposite edges like a toroid shape, and instead the grid is finite.
-def Detailed_Bal_Eqn_Val(array, row, col, N, shift_list=None):
+def Energy_Eqn_Val(array, row, col, N, shift_list=None):
     A = []
     B = []
     C = []
