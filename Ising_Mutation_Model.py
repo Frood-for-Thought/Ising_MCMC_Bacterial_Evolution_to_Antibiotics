@@ -115,6 +115,10 @@ for curr_iter in range(5):
     spin_pos = fnd_pos(spin, linearIndex)
     row = spin_pos[0]
     col = spin_pos[1]
-    
+
+    # If there are no spins then the program moves on to the next iteration
+    if spin[row][col] == 0:
+        continue
+
     # GET VALUES FOR THE ENERGY EQUATION
     Energy_Eqn_Val(spin, row, col, N)
