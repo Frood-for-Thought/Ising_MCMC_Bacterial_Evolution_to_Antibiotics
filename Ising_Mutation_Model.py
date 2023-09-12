@@ -115,4 +115,6 @@ for curr_iter in range(5):
     spin_pos = fnd_pos(spin, linearIndex)
     row = spin_pos[0]
     col = spin_pos[1]
-    print(f"row, col = {row, col}")
+    
+    # GET VALUES FOR THE ENERGY EQUATION
+    Energy_Eqn_Val(spin, row, col, N)
