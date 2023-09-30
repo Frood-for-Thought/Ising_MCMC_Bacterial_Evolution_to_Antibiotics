@@ -73,12 +73,6 @@ for Cipro_ElRow in range(N):
         # Lower Right Square
         elif El_Col_Sum >= (N - 1) and Cipro_ElCol > N / 2 < Cipro_ElRow:
             Cipro_Function[Cipro_ElRow][Cipro_ElCol] = max((Cipro_ElCol - ColMax), (Cipro_ElRow - RowMax))
-
-## Function to convert gradient to exponential
-# for Cipro_ElRow in range(N):
-#     for Cipro_ElCol in range(N):
-#         Cipro_Function[Cipro_ElRow][Cipro_ElCol] = \
-#             (np.exp(round((Cipro_Function[Cipro_ElRow][Cipro_ElCol]) / (N / 2), 2)) - 1)*(N/1.60)
 Cipro_Function = np.array(Cipro_Function)
 
 # Further adjustments to the antibiotic gradient.
@@ -88,15 +82,15 @@ for Cipro_ElRow in range(N):
 Cipro_Func = np.array(Cipro_Func)
 print(Cipro_Func)
 
-# Show a figure of the Food and Cipro gradients
-fig, axis = plt.subplots(1, 2)
-im1 = axis[0].imshow(Food_Func)
-axis[0].set_title("Food Gradient")
-fig.colorbar(im1, ax=axis[0])
-im2 = axis[1].imshow(Cipro_Func)
-fig.colorbar(im2, ax=axis[1])
-axis[1].set_title("Antibiotic Gradient")
-plt.show()
+# # Show a figure of the Food and Cipro gradients
+# fig, axis = plt.subplots(1, 2)
+# im1 = axis[0].imshow(Food_Func)
+# axis[0].set_title("Food Gradient")
+# fig.colorbar(im1, ax=axis[0])
+# im2 = axis[1].imshow(Cipro_Func)
+# fig.colorbar(im2, ax=axis[1])
+# axis[1].set_title("Antibiotic Gradient")
+# plt.show()
 
 #   INITIALIZE THE ITERATION LOOP
 # np.size(spin) counts the number of elements in the array "spin"
