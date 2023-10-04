@@ -12,16 +12,18 @@ def fnd_pos(array, pos):
             row = i
             return row, col
 
+
 def partition_gillespie(prob_list, rand, R=None, Cond_list=None):
     """
-    Use partition function to find which transition occurs in a manner similar to the 2nd stage of the 
-    Gillespie Algorithm. This function basically gets a list of varying length with probabilities as the elements, 
-    then loops through to calculate the rates of a reaction occurring.  
+    Use partition function to find which transition occurs in a manner similar to the 2nd stage of the
+    Gillespie Algorithm. This function basically gets a list of varying length with probabilities as the elements,
+    then loops through to calculate the rates of a reaction occurring.
     It then uses the rates to determine which condition occurred and marks one as True while the rest are False.
-    :param prob_list: 
-    :param rand: 
-    :param R: 
-    :param Cond_list: 
+    :param prob_list: Insert in a list of all the probability of the allowed reactions.
+    :param rand: A previously generated random number that is inserted.
+    :param R: A list constructed to contain all the normalized rates or reactions taken from prob_list. 
+    :param Cond_list: List of booleans, with default = False.  When rand is in the normalized range for a rate
+    of reaction to occur, the condition for that reaction will be set to True.
     :return: Cond_list
     """
     p_sum = sum(prob_list)
@@ -42,6 +44,7 @@ def partition_gillespie(prob_list, rand, R=None, Cond_list=None):
         elif R[r-1] < rand <= R[r]:
             Cond_list[r] = True
     return Cond_list
+
 
 # This algorithm determines the neighbouring spins next to the spin at the position selected and calculates
 # the necessary values for the energy equation.  It's made so that positions at the edges and corners are
