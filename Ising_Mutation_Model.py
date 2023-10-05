@@ -114,5 +114,14 @@ for curr_iter in range(5):
     if spin[row][col] == 0:
         continue
 
-    # GET VALUES FOR THE ENERGY EQUATION
-    Energy_Eqn_Val(spin, row, col, N)
+    # GET VALUES FOR THE FITNESS EQUATION
+    get_values = Fitness_Eqn_Val(spin, row, col, N)
+    neighbours = get_values[0]
+    # print(f"neighbours = {neighbours}")
+    neighbours_sqrd = get_values[1]
+    # print(f"neighbours_sqrd = {neighbours_sqrd}")
+    one_minus_neighbour = get_values[2]
+    # print(f"OneMinusNeighbour = {one_minus_neighbour}")
+    neighbour_spin_product = get_values[4]
+    # print(f"The product of the spin and its neighbours = {get_values[4]}")
+    
