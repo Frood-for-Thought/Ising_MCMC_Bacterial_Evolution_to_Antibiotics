@@ -1,9 +1,15 @@
 
 
-# This replaces the MATLAB built-in function: [row, col] = ind2sub(array, rand_element_selected)
-# Given the array and the random element number in the array, find the row and column for said element
-# the elements are numbered from left to right, top to bottom
+
 def fnd_pos(array, pos):
+    """
+    This replaces the MATLAB built-in function: [row, col] = ind2sub(array, rand_element_selected).
+    Given the array and the random element number in the array, find the row and column for said element the elements
+    are numbered from left to right, top to bottom.
+    :param array: Insert the array.
+    :param pos: Random array element number inserted.
+    :return: The row, col position for the array element number.
+    """
     col = pos - 1  # start at column 0
     for i, j in enumerate(array):
         col -= len(j)
@@ -46,10 +52,21 @@ def partition_gillespie(prob_list, rand, R=None, Cond_list=None):
     return Cond_list
 
 
-# This algorithm determines the neighbouring spins next to the spin at the position selected and calculates
-# the necessary values for the energy equation.  It's made so that positions at the edges and corners are
-# not connected to the opposite edges like a toroid shape, and instead the grid is finite.
 def Energy_Eqn_Val(array, row, col, N, shift_list=None):
+    """
+    This algorithm determines the neighbouring spins next to the spin at the position selected and calculates
+    the necessary values for the energy equation.  It's made so that positions at the edges and corners are
+    not connected to the opposite edges like a toroid shape, and instead the grid is finite.  The function makes
+    a new matrix which shifts the positions of the neighbouring spins to be located where the central spin is.
+    :param array: Insert the array.
+    :param row: The row located for the selected element.
+    :param col: The col located for the selected element.
+    :param N: The N x N size of "array".
+    :param shift_list: A dictionary list for the elements neighbouring the central selected element at (row, col).
+    Each element dictionary contains a label for the position (up, down, left, right), an Include integer (0 or 1),
+    and a Matrix to shift the spin towards the position of the selected element (row, col).
+    :return:
+    """
     A = []
     B = []
     C = []
