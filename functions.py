@@ -52,7 +52,7 @@ def partition_gillespie(prob_list, rand, R=None, Cond_list=None):
     return Cond_list
 
 
-def Energy_Eqn_Val(array, row, col, N, shift_list=None):
+def Fitness_Eqn_Val(array, row, col, N, shift_list=None):
     """
     This algorithm determines the neighbouring spins next to the spin at the position selected and calculates
     the necessary values for the energy equation.  It's made so that positions at the edges and corners are
