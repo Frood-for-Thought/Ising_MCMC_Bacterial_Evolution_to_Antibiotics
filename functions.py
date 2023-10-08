@@ -19,39 +19,6 @@ def fnd_pos(array, pos):
             return row, col
 
 
-def partition_gillespie(prob_list, rand, R=None, Cond_list=None):
-    """
-    Use partition function to find which transition occurs in a manner similar to the 2nd stage of the
-    Gillespie Algorithm. This function basically gets a list of varying length with probabilities as the elements,
-    then loops through to calculate the rates of a reaction occurring.
-    It then uses the rates to determine which condition occurred and marks one as True while the rest are False.
-    :param prob_list: Insert in a list of all the probability of the allowed reactions.
-    :param rand: A previously generated random number that is inserted.
-    :param R: A list constructed to contain all the normalized rates or reactions taken from prob_list. 
-    :param Cond_list: List of booleans, with default = False.  When rand is in the normalized range for a rate
-    of reaction to occur, the condition for that reaction will be set to True.
-    :return: Cond_list
-    """
-    p_sum = sum(prob_list)
-    # Set R and Cond_list as empty arrays.
-    if R is None and Cond_list is None:
-        R = []
-        Cond_list = []
-    for i, p in enumerate(prob_list):
-        if i < 1:
-            R.append(p / p_sum)
-            Cond_list.append(False)
-        else:
-            R.append(R[i - 1] + p / p_sum)
-            Cond_list.append(False)
-    for r in range(len(R)):
-        if r == 0 and rand <= R[r]:
-            Cond_list[r] = True
-        elif R[r-1] < rand <= R[r]:
-            Cond_list[r] = True
-    return Cond_list
-
-
 def Fitness_Eqn_Val(array, row, col, N, shift_list=None):
     """
     This algorithm determines the neighbouring spins next to the spin at the position selected and calculates
@@ -140,3 +107,36 @@ def Fitness_Eqn_Val(array, row, col, N, shift_list=None):
     for i in range(len(sl)):
         Counter_Food_Affinity += np.prod(sl[0]["Matrix"])
     return neighbours, neighbours_sqrd, OneMinusNeighbour, death_neighbour, Counter_Food_Affinity
+
+
+def partition_gillespie(prob_list, rand, R=None, Cond_list=None):
+    """
+    Use partition function to find which transition occurs in a manner similar to the 2nd stage of the
+    Gillespie Algorithm. This function basically gets a list of varying length with probabilities as the elements,
+    then loops through to calculate the rates of a reaction occurring.
+    It then uses the rates to determine which condition occurred and marks one as True while the rest are False.
+    :param prob_list: Insert in a list of all the probability of the allowed reactions.
+    :param rand: A previously generated random number that is inserted.
+    :param R: A list constructed to contain all the normalized rates or reactions taken from prob_list.
+    :param Cond_list: List of booleans, with default = False.  When rand is in the normalized range for a rate
+    of reaction to occur, the condition for that reaction will be set to True.
+    :return: Cond_list
+    """
+    p_sum = sum(prob_list)
+    # Set R and Cond_list as empty arrays.
+    if R is None and Cond_list is None:
+        R = []
+        Cond_list = []
+    for i, p in enumerate(prob_list):
+        if i < 1:
+            R.append(p / p_sum)
+            Cond_list.append(False)
+        else:
+            R.append(R[i - 1] + p / p_sum)
+            Cond_list.append(False)
+    for r in range(len(R)):
+        if r == 0 and rand <= R[r]:
+            Cond_list[r] = True
+        elif R[r-1] < rand <= R[r]:
+            Cond_list[r] = True
+    return Cond_list
