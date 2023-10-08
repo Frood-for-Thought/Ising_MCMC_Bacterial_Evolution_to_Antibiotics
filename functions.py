@@ -1,7 +1,10 @@
+
 class Ising_Functions:
-    def __init__(self, array, pos):
+    def __init__(self, array, pos, N):
         self.array = array
         self.pos = pos
+        self.N = N
+        self.row, self.col = self._fnd_pos()
 
     def _fnd_pos(self):
         """
@@ -12,8 +15,8 @@ class Ising_Functions:
         :param pos: Random array element number inserted.
         :return: The row, col position for the array element number.
         """
-        col = pos - 1  # start at column 0
-        for i, j in enumerate(array):
+        col = self.pos - 1  # start at column 0
+        for i, j in enumerate(self.array):
             col -= len(j)
             if col < 0:
                 col += len(j)
