@@ -23,7 +23,7 @@ class Ising_Functions:
                 row = i
                 return row, col
 
-    def Fitness_Eqn_Val(array, row, col, N, shift_list=None):
+    def Fitness_Eqn_Val(self, shift_list=None):
         """
         This algorithm determines the neighbouring spins next to the spin at the position selected and calculates
         the necessary values for the energy equation.  It's made so that positions at the edges and corners are
@@ -49,17 +49,17 @@ class Ising_Functions:
                           {"Label": "D", "Include": 0, "Matrix": D}]
 
         # Determine if the spin is on the left or right corner, or neither
-        if col == 0:
+        if self.col == 0:
             shift_list[0]["Include"] = 1
-        elif col == N - 1:
+        elif self.col == self.N - 1:
             shift_list[1]["Include"] = 1
         else:
             shift_list[0]["Include"] = 1
             shift_list[1]["Include"] = 1
         # Determine if the spin is on the top or bottom corner, or neither
-        if row == 0:
+        if self.row == 0:
             shift_list[2]["Include"] = 1
-        elif row == N - 1:
+        elif self.row == self.N - 1:
             shift_list[3]["Include"] = 1
         else:
             shift_list[2]["Include"] = 1
@@ -79,21 +79,21 @@ class Ising_Functions:
                 # Calculate Matrix Shifts
                 if j["Label"] == "A":
                     # A = moves all elements to the right[0 1], replaces circshift(spin, [0 1]) in MATLAB
-                    A = np.roll(array, -1)
-                    j["Matrix"] = A[row][col]
+                    A = np.roll(self.array, -1)
+                    j["Matrix"] = A[self.row][self.col]
                 elif j["Label"] == "B":
                     # B = moves all elements to the left[0 - 1], replaces circshift(spin, [0 - 1]) in MATLAB
-                    B = np.roll(array, 1)
-                    j["Matrix"] = B[row][col]
+                    B = np.roll(self.array, 1)
+                    j["Matrix"] = B[self.row][self.col]
                 elif j["Label"] == "C":
                     # C = Shifts down all the elements, replaces circshift(spin, [1 0]), in MATLAB # numpy axis are the
                     # directions along the rows and columns, with axis=0 being the rows and axis=1 being the columns
-                    C = np.roll(array, -1, axis=0)
-                    j["Matrix"] = C[row][col]
+                    C = np.roll(self.array, -1, axis=0)
+                    j["Matrix"] = C[self.row][self.col]
                 elif j["Label"] == "D":
                     # D = Shift up moves all the elements, replaces circshift(spin, [-1 0]) in MATLAB
-                    D = np.roll(array, 1, axis=0)
-                    j["Matrix"] = D[row][col]
+                    D = np.roll(self.array, 1, axis=0)
+                    j["Matrix"] = D[self.row][self.col]
             else:
                 # Start with removing the matrices that are not used, sl.remove(sl[i])
                 sl.pop()
