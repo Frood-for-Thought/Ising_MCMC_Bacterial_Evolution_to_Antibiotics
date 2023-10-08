@@ -112,6 +112,7 @@ class Ising_Functions:
             Counter_Food_Affinity += np.prod(sl[0]["Matrix"])
         return neighbours, neighbours_sqrd, OneMinusNeighbour, death_neighbour, Counter_Food_Affinity
 
+    @staticmethod
     def partition_gillespie(prob_list, rand, R=None, Cond_list=None):
         """
         Use partition function to find which transition occurs in a manner similar to the 2nd stage of the
