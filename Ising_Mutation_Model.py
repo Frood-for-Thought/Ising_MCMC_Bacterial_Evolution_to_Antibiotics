@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # A MARKOV CHAIN MONTE CARLO (MCMC) METHOD TO DESCRIBE BACTERIAL EVOLUTION USING THE ISING MODEL
 
 # All the parameters are set up for N = 100
-kT = 2
+kT = 0.2
 N = 100
 
 # Check to make sure "numSpinsPerDim" is even.
@@ -130,8 +130,8 @@ for curr_iter in range(5):
         continue
 
     # EXCHANGE INTERACTION VALUES
-    J = 10
-    Jd = 40
+    J = 1.86
+    Jd = 5.95
     Jf = Food_Function[row][col]
     Jc = Cipro_Func[row][col]
     Jf_max = Food_Function[0][0]
