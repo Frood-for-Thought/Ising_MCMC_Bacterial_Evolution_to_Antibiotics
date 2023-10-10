@@ -1,5 +1,5 @@
 # Ising_MCMC_Bacterial_Evolution_to_Antibiotics
-WORK IN PROGRESS. A Markov Chain Monte Carlo Ising Model for Bacterial Evolution.
+A Markov Chain Monte Carlo Ising Model for Bacterial Evolution.  Simulation to describe bacterial evolution to antibiotics along a food and drug gradient.
 
 ## Citation
 The work is made using the thesis "Simulated accelerated evolution by modeling the rapid fixation of bacteria along an antibiotic gradient":
