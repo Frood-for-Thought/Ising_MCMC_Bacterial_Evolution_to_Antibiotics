@@ -113,9 +113,9 @@ for curr_iter in range(5):
     row = spin_pos[0]
     col = spin_pos[1]
 
-    # If there are no spins then the program moves on to the next iteration
-    if spin[row][col] == 0:
-        continue
+    # # If there are no spins then the program moves on to the next iteration
+    # if spin[row][col] == 0:
+    #     continue
 
     # GET VALUES FOR THE FITNESS EQUATION
     get_values = Ising_Functions(spin, linearIndex, N).Fitness_Eqn_Val()
@@ -146,6 +146,49 @@ for curr_iter in range(5):
         prob_d = np.exp(-dE_1m1_0 / kT)
         # The probability of flipping
         prob_flip = np.exp(-dE_flip / kT)
+        prob_list = [prob_d, prob_flip]
+
+        
+        # IT'S A CASSEROLE DOWN THERE
+        # This random number selects values in the partition function, function
+        prob_rand = np.random.rand()
+        # Both flip and death are acceptable
+        if dE_flip < 0 and dE_1m1_0 < 0:
+            # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
+            Flip_or_D = partition_gillespie(prob_list, prob_rand)
+            # Death occurs
+            if Flip_or_D[0] is True:
+                spin[row][col] = 0
+            # Spin Flip Occurs
+            elif Flip_or_D[1] is True:
+                spin[row][col] = -spin[row][col]
+        # A flip is going to occur
+        elif dE_flip < 0:
+            spin[row][col] = -spin[row][col]
+        # The spin will go to zero
+        elif dE_1m1_0 < 0:
+            spin[row][col] = 0
+        # Probability of transition still occurring due to detailed balance
+        elif dE_flip >= 0 and dE_1m1_0 >= 0:
+            prob_rand_g = np.random.rand()
+            # The probability of both is selected
+            if prob_rand_g < prob_d and prob_rand_g < prob_flip:
+                # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
+                Flip_or_D = partition_gillespie(prob_list, prob_rand)
+                # Death occurs
+                if Flip_or_D[0] is True:
+                    spin[row][col] = 0
+                # Spin Flip Occurs
+                elif Flip_or_D[1] is True:
+                    spin[row][col] = -spin[row][col]
+            # A flip is selected
+            elif prob_rand_g < prob_flip:
+                spin[row][col] = -spin[row][col]
+            # Death is selected
+            elif prob_rand_g < prob_d:
+                spin[row][col] = 0
+            # else:  # Nothing Happens
+
 
     else:  # The selected spin is 0
         # Growth: spin = 0 --> 1
@@ -156,11 +199,18 @@ for curr_iter in range(5):
         dE_0_m1 = (J * neighbours) + Jd - (Jf * neighbours_sqrd) - Jc
         - (J / 2) * one_minus_neighbour * neighbour_spin_product * np.exp(-Jf_max + Jf + 0.095)
 
+        fit_list = [dE_0_1, dE_0_m1]
+        fit_bool = [i < 0 for i in fit_list]
+        print(sum(fit_bool))
+
         # The probability of growing to 1
         prob_g_1 = np.exp(-(dE_0_1 / kT))
         # The probability of growing to -1
         prob_g_m1 = np.exp(-(dE_0_m1 / kT))
         prob_list = [prob_g_1, prob_g_m1]
+
+
+
 
     # # testing staticmethod function
     # prob_list = [0.1, 0.2, 0.3]
