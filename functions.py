@@ -4,9 +4,9 @@ class Ising_Functions:
         self.array = array
         self.pos = pos
         self.N = N
-        self.row, self.col = self._fnd_pos()
+        self.row, self.col = self.fnd_pos()
 
-    def _fnd_pos(self):
+    def fnd_pos(self):
         """
         This replaces the MATLAB built-in function: [row, col] = ind2sub(array, rand_element_selected).
         Given the array and the random element number in the array, find the row and column for said element the elements
