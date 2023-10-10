@@ -80,7 +80,6 @@ Cipro_Func = [[0 for col in range(N)] for row in range(N)]
 for Cipro_ElRow in range(N):
     Cipro_Func[Cipro_ElRow] = list(map(lambda i: i * (2.115/(N/2)), Cipro_Function[Cipro_ElRow]))
 Cipro_Func = np.array(Cipro_Func)
-print(Cipro_Func)
 
 # # Show a figure of the Food and Cipro gradients
 # fig, axis = plt.subplots(1, 2)
@@ -91,6 +90,9 @@ print(Cipro_Func)
 # fig.colorbar(im2, ax=axis[1])
 # axis[1].set_title("Antibiotic Gradient")
 # plt.show()
+# exit()
+
+from functions import Ising_Functions
 
 #   INITIALIZE THE ITERATION LOOP
 # np.size(spin) counts the number of elements in the array "spin"
@@ -106,33 +108,33 @@ for curr_iter in range(5):
     # print(f"Random Element Selected Number = {linearIndex}")
 
     # Use the function to find the position of the random spin
-    spin_pos = fnd_pos(spin, linearIndex)
+    spin_pos = Ising_Functions(spin, linearIndex, N).fnd_pos()
     row = spin_pos[0]
     col = spin_pos[1]
+    print(row, col)
 
     # If there are no spins then the program moves on to the next iteration
     if spin[row][col] == 0:
         continue
 
-    # GET VALUES FOR THE FITNESS EQUATION
-    get_values = Fitness_Eqn_Val(spin, row, col, N)
-    neighbours = get_values[0]
-    # print(f"neighbours = {neighbours}")
-    neighbours_sqrd = get_values[1]
-    # print(f"neighbours_sqrd = {neighbours_sqrd}")
-    one_minus_neighbour = get_values[2]
-    # print(f"OneMinusNeighbour = {one_minus_neighbour}")
-    neighbour_spin_product = get_values[4]
-    # print(f"The product of the spin and its neighbours = {get_values[4]}")
-
-    # If there are no spins then the program moves on to the next iteration
-    if spin[row][col] == neighbours == 0:
-        continue
-
-    # EXCHANGE INTERACTION VALUES
-    J = 1.86
-    Jd = 5.95
-    Jf = Food_Function[row][col]
-    Jc = Cipro_Func[row][col]
-    Jf_max = Food_Function[0][0]
-    
+    # # GET VALUES FOR THE FITNESS EQUATION
+    # get_values = Fitness_Eqn_Val(spin, row, col, N)
+    # neighbours = get_values[0]
+    # # print(f"neighbours = {neighbours}")
+    # neighbours_sqrd = get_values[1]
+    # # print(f"neighbours_sqrd = {neighbours_sqrd}")
+    # one_minus_neighbour = get_values[2]
+    # # print(f"OneMinusNeighbour = {one_minus_neighbour}")
+    # neighbour_spin_product = get_values[4]
+    # # print(f"The product of the spin and its neighbours = {get_values[4]}")
+    #
+    # # If there are no spins then the program moves on to the next iteration
+    # if spin[row][col] == neighbours == 0:
+    #     continue
+    #
+    # # EXCHANGE INTERACTION VALUES
+    # J = 1.86
+    # Jd = 5.95
+    # Jf = Food_Function[row][col]
+    # Jc = Cipro_Func[row][col]
+    # Jf_max = Food_Function[0][0]
