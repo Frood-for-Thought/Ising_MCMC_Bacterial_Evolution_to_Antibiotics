@@ -124,4 +124,15 @@ for curr_iter in range(5):
     # print(f"OneMinusNeighbour = {one_minus_neighbour}")
     neighbour_spin_product = get_values[4]
     # print(f"The product of the spin and its neighbours = {get_values[4]}")
+
+    # If there are no spins then the program moves on to the next iteration
+    if spin[row][col] == neighbours == 0:
+        continue
+
+    # EXCHANGE INTERACTION VALUES
+    J = 10
+    Jd = 40
+    Jf = Food_Function[row][col]
+    Jc = Cipro_Func[row][col]
+    Jf_max = Food_Function[0][0]
     
