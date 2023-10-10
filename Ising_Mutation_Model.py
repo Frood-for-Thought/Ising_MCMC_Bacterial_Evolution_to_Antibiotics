@@ -113,9 +113,9 @@ for curr_iter in range(5):
     row = spin_pos[0]
     col = spin_pos[1]
 
-    # # If there are no spins then the program moves on to the next iteration
-    # if spin[row][col] == 0:
-    #     continue
+    # If there are no spins then the program moves on to the next iteration
+    if spin[row][col] == 0:
+        continue
 
     # GET VALUES FOR THE FITNESS EQUATION
     get_values = Ising_Functions(spin, linearIndex, N).Fitness_Eqn_Val()
@@ -131,7 +131,7 @@ for curr_iter in range(5):
     Jc = Cipro_Func[row][col]
     Jf_max = Food_Function[0][0]
 
-    # testing staticmethod function
-    prob_list = [0.1, 0.2, 0.3]
-    prob_rand = np.random.rand()
-    print(Ising_Functions.partition_gillespie(prob_list, prob_rand))
+    # # testing staticmethod function
+    # prob_list = [0.1, 0.2, 0.3]
+    # prob_rand = np.random.rand()
+    # print(Ising_Functions.partition_gillespie(prob_list, prob_rand))
