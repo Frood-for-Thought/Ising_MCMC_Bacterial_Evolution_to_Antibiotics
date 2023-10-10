@@ -131,6 +131,27 @@ for curr_iter in range(5):
     Jc = Cipro_Func[row][col]
     Jf_max = Food_Function[0][0]
 
+    # SPIN FITNESS
+    if spin[row][col] != 0:  # The selected spin is either -1 or 1
+
+        # Death: spin = 1/-1 --> 0
+        dE_1m1_0 = (J * spin[row][col] * neighbours) - Jd + (Jf * neighbours_sqrd) - (Jc * spin[row][col])
+        - (J / 2) * (1 - spin[row][col]) * one_minus_neighbour * neighbour_spin_product * np.exp(-Jf_max + Jf + 0.095)
+
+        # Spin Flip: spin = 1 --> -1, or spin = -1 --> 1
+        dE_flip = (2 * J * spin[row][col] * neighbours) - (2 * Jc * spin[row][col])  # Putting 2*(J/2) below for clarity
+        + 2 * (J / 2) * spin[row][col] * one_minus_neighbour * neighbour_spin_product * np.exp(-Jf_max + Jf + 0.095)
+
+    else:  # The selected spin is 0
+        # Growth: spin = 0 --> 1
+        dE_0_1 = -(J * neighbours) + Jd - (Jf * neighbours_sqrd) + Jc
+        + (J / 2) * one_minus_neighbour * neighbour_spin_product * np.exp(-Jf_max + Jf + 0.095)
+
+        # Growth: spin = 0 --> -1
+        dE_0_m1 = (J * neighbours) + Jd - (Jf * neighbours_sqrd) - Jc
+        - (J / 2) * one_minus_neighbour * neighbour_spin_product * np.exp(-Jf_max + Jf + 0.095)
+
+
     # # testing staticmethod function
     # prob_list = [0.1, 0.2, 0.3]
     # prob_rand = np.random.rand()
