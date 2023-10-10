@@ -111,30 +111,21 @@ for curr_iter in range(5):
     spin_pos = Ising_Functions(spin, linearIndex, N).fnd_pos()
     row = spin_pos[0]
     col = spin_pos[1]
-    print(row, col)
 
     # If there are no spins then the program moves on to the next iteration
     if spin[row][col] == 0:
         continue
 
-    # # GET VALUES FOR THE FITNESS EQUATION
-    # get_values = Fitness_Eqn_Val(spin, row, col, N)
-    # neighbours = get_values[0]
-    # # print(f"neighbours = {neighbours}")
-    # neighbours_sqrd = get_values[1]
-    # # print(f"neighbours_sqrd = {neighbours_sqrd}")
-    # one_minus_neighbour = get_values[2]
-    # # print(f"OneMinusNeighbour = {one_minus_neighbour}")
-    # neighbour_spin_product = get_values[4]
-    # # print(f"The product of the spin and its neighbours = {get_values[4]}")
-    #
-    # # If there are no spins then the program moves on to the next iteration
-    # if spin[row][col] == neighbours == 0:
-    #     continue
-    #
-    # # EXCHANGE INTERACTION VALUES
-    # J = 1.86
-    # Jd = 5.95
-    # Jf = Food_Function[row][col]
-    # Jc = Cipro_Func[row][col]
-    # Jf_max = Food_Function[0][0]
+    # GET VALUES FOR THE FITNESS EQUATION
+    get_values = Ising_Functions(spin, linearIndex, N).Fitness_Eqn_Val()
+    neighbours = get_values[0]
+    neighbours_sqrd = get_values[1]
+    one_minus_neighbour = get_values[2]
+    neighbour_spin_product = get_values[4]
+
+    # EXCHANGE INTERACTION VALUES
+    J = 1.86
+    Jd = 5.95
+    Jf = Food_Function[row][col]
+    Jc = Cipro_Func[row][col]
+    Jf_max = Food_Function[0][0]

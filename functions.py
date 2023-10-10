@@ -1,3 +1,5 @@
+import numpy as np
+
 
 class Ising_Functions:
     def __init__(self, array, pos, N):
