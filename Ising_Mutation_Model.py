@@ -148,7 +148,7 @@ for curr_iter in range(5):
         prob_flip = np.exp(-dE_flip / kT)
         prob_list = [prob_d, prob_flip]
 
-        
+
         # IT'S A CASSEROLE DOWN THERE
         # This random number selects values in the partition function, function
         prob_rand = np.random.rand()
@@ -210,7 +210,41 @@ for curr_iter in range(5):
         prob_list = [prob_g_1, prob_g_m1]
 
 
-
+        # IT'S A CASSEROLE DOWN THERE
+        # This selects values in the partition function
+        prob_rand = np.random.rand()
+        # Both are acceptable
+        if dE_0_1 < 0 and dE_0_m1 < 0:
+            # Use partition function to find which transition occurs
+            G_1_or_m1 = partition_gillespie(prob_list, prob_rand)
+            if G_1_or_m1[0] is True:
+                spin[row][col] = 1
+            elif G_1_or_m1[1] is True:
+                spin[row][col] = -1
+        # Only 0 --> 1 acceptable
+        elif dE_0_1 < 0:
+            spin[row][col] = 1
+        # Only 0 --> -1 acceptable
+        elif dE_0_m1 < 0:
+            spin[row][col] = -1
+        # Probability of transition still occurring due to detailed balance
+        elif dE_0_1 >= 0 and dE_0_m1 >= 0:
+            prob_rand_g = np.random.rand()
+            # The probability of both is selected
+            if prob_rand_g < prob_g_1 and prob_rand_g < dE_0_m1:
+                # Use partition function to find which transition occurs
+                G_1_or_m1 = partition_gillespie(prob_list, prob_rand)
+                if G_1_or_m1[0] is True:
+                    spin[row][col] = 1
+                elif G_1_or_m1[1] is True:
+                    spin[row][col] = -1
+            # Probability of 0 --> 1 selected
+            elif prob_rand_g < prob_g_1:
+                spin[row][col] = 1
+            # Probability of 0 --> -1 selected
+            elif prob_rand_g < prob_g_m1:
+                spin[row][col] = -1
+            # else:  # Nothing Happens
 
     # # testing staticmethod function
     # prob_list = [0.1, 0.2, 0.3]
