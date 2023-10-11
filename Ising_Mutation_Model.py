@@ -155,7 +155,7 @@ for curr_iter in range(5):
         # Both flip and death are acceptable
         if dE_flip < 0 and dE_1m1_0 < 0:
             # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
-            Flip_or_D = partition_gillespie(prob_list, prob_rand)
+            Flip_or_D = Ising_Functions.partition_gillespie(prob_list, prob_rand)
             # Death occurs
             if Flip_or_D[0] is True:
                 spin[row][col] = 0
@@ -174,7 +174,7 @@ for curr_iter in range(5):
             # The probability of both is selected
             if prob_rand_g < prob_d and prob_rand_g < prob_flip:
                 # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
-                Flip_or_D = partition_gillespie(prob_list, prob_rand)
+                Flip_or_D = Ising_Functions.partition_gillespie(prob_list, prob_rand)
                 # Death occurs
                 if Flip_or_D[0] is True:
                     spin[row][col] = 0
@@ -201,7 +201,6 @@ for curr_iter in range(5):
 
         fit_list = [dE_0_1, dE_0_m1]
         fit_bool = [i < 0 for i in fit_list]
-        print(sum(fit_bool))
 
         # The probability of growing to 1
         prob_g_1 = np.exp(-(dE_0_1 / kT))
@@ -216,7 +215,7 @@ for curr_iter in range(5):
         # Both are acceptable
         if dE_0_1 < 0 and dE_0_m1 < 0:
             # Use partition function to find which transition occurs
-            G_1_or_m1 = partition_gillespie(prob_list, prob_rand)
+            G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
             if G_1_or_m1[0] is True:
                 spin[row][col] = 1
             elif G_1_or_m1[1] is True:
@@ -233,7 +232,7 @@ for curr_iter in range(5):
             # The probability of both is selected
             if prob_rand_g < prob_g_1 and prob_rand_g < dE_0_m1:
                 # Use partition function to find which transition occurs
-                G_1_or_m1 = partition_gillespie(prob_list, prob_rand)
+                G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
                 if G_1_or_m1[0] is True:
                     spin[row][col] = 1
                 elif G_1_or_m1[1] is True:
