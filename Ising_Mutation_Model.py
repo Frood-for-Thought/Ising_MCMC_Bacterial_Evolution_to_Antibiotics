@@ -132,6 +132,7 @@ for curr_iter in range(5):
     Jf_max = Food_Function[0][0]
 
     # SPIN FITNESS
+
     if spin[row][col] != 0:  # The selected spin is either -1 or 1
 
         # Death: spin = 1/-1 --> 0
@@ -147,7 +148,6 @@ for curr_iter in range(5):
         # The probability of flipping
         prob_flip = np.exp(-dE_flip / kT)
         prob_list = [prob_d, prob_flip]
-
 
         # IT'S A CASSEROLE DOWN THERE
         # This random number selects values in the partition function, function
@@ -187,8 +187,6 @@ for curr_iter in range(5):
             # Death is selected
             elif prob_rand_g < prob_d:
                 spin[row][col] = 0
-            # else:  # Nothing Happens
-
 
     else:  # The selected spin is 0
         # Growth: spin = 0 --> 1
@@ -208,8 +206,6 @@ for curr_iter in range(5):
         prob_g_m1 = np.exp(-(dE_0_m1 / kT))
         prob_list = [prob_g_1, prob_g_m1]
 
-
-        # IT'S A CASSEROLE DOWN THERE
         # This selects values in the partition function
         prob_rand = np.random.rand()
         # Both are acceptable
@@ -230,7 +226,7 @@ for curr_iter in range(5):
         elif dE_0_1 >= 0 and dE_0_m1 >= 0:
             prob_rand_g = np.random.rand()
             # The probability of both is selected
-            if prob_rand_g < prob_g_1 and prob_rand_g < dE_0_m1:
+            if prob_rand_g < prob_g_1 and prob_rand_g < prob_g_m1:
                 # Use partition function to find which transition occurs
                 G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
                 if G_1_or_m1[0] is True:
@@ -243,9 +239,3 @@ for curr_iter in range(5):
             # Probability of 0 --> -1 selected
             elif prob_rand_g < prob_g_m1:
                 spin[row][col] = -1
-            # else:  # Nothing Happens
-
-    # # testing staticmethod function
-    # prob_list = [0.1, 0.2, 0.3]
-    # prob_rand = np.random.rand()
-    # print(Ising_Functions.partition_gillespie(prob_list, prob_rand))
