@@ -197,9 +197,6 @@ for curr_iter in range(5):
         dE_0_m1 = (J * neighbours) + Jd - (Jf * neighbours_sqrd) - Jc
         - (J / 2) * one_minus_neighbour * neighbour_spin_product * np.exp(-Jf_max + Jf + 0.095)
 
-        fit_list = [dE_0_1, dE_0_m1]
-        fit_bool = [i < 0 for i in fit_list]
-
         # The probability of growing to 1
         prob_g_1 = np.exp(-(dE_0_1 / kT))
         # The probability of growing to -1
