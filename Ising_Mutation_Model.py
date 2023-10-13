@@ -113,9 +113,9 @@ for curr_iter in range(5):
     row = spin_pos[0]
     col = spin_pos[1]
 
-    # # If there are no spins then the program moves on to the next iteration
-    # if spin[row][col] == 0:
-    #     continue
+    # If there are no spins then the program moves on to the next iteration
+    if spin[row][col] == 0:
+        continue
 
     # GET VALUES FOR THE FITNESS EQUATION
     get_values = Ising_Functions(spin, linearIndex, N).Fitness_Eqn_Val()
