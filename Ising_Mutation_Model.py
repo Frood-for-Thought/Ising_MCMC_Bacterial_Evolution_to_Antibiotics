@@ -150,8 +150,9 @@ for curr_iter in range(5):
         prob_list = [prob_d, prob_flip]
 
         # IT'S A CASSEROLE DOWN THERE
-        # This random number selects values in the partition function, function
+        # This random number selects values in the partition function
         prob_rand = np.random.rand()
+        # Determine which values are accepted
         # Both flip and death are acceptable
         if dE_flip < 0 and dE_1m1_0 < 0:
             # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
@@ -174,7 +175,7 @@ for curr_iter in range(5):
             # The probability of both is selected
             if prob_rand_g < prob_d and prob_rand_g < prob_flip:
                 # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
-                Flip_or_D = Ising_Functions.partition_gillespie(prob_list, prob_rand)
+                Flip_or_D = Ising_Functions.partition_gillespie(prob_list, prob_rand_g)
                 # Death occurs
                 if Flip_or_D[0] is True:
                     spin[row][col] = 0
@@ -199,6 +200,7 @@ for curr_iter in range(5):
 
         fit_list = [dE_0_1, dE_0_m1]
         fit_bool = [i < 0 for i in fit_list]
+        sum(fit_bool)
 
         # The probability of growing to 1
         prob_g_1 = np.exp(-(dE_0_1 / kT))
@@ -206,7 +208,7 @@ for curr_iter in range(5):
         prob_g_m1 = np.exp(-(dE_0_m1 / kT))
         prob_list = [prob_g_1, prob_g_m1]
 
-        # This selects values in the partition function
+        # Determine which values are accepted
         prob_rand = np.random.rand()
         # Both are acceptable
         if dE_0_1 < 0 and dE_0_m1 < 0:
@@ -228,7 +230,7 @@ for curr_iter in range(5):
             # The probability of both is selected
             if prob_rand_g < prob_g_1 and prob_rand_g < prob_g_m1:
                 # Use partition function to find which transition occurs
-                G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
+                G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand_g)
                 if G_1_or_m1[0] is True:
                     spin[row][col] = 1
                 elif G_1_or_m1[1] is True:
@@ -239,3 +241,37 @@ for curr_iter in range(5):
             # Probability of 0 --> -1 selected
             elif prob_rand_g < prob_g_m1:
                 spin[row][col] = -1
+
+        # # Determine which values are accepted
+        # prob_rand = np.random.rand()
+        # # Both are acceptable
+        # if dE_0_1 < 0 and dE_0_m1 < 0:
+        #     # Use partition function to find which transition occurs
+        #     G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
+        #     if G_1_or_m1[0] is True:
+        #         spin[row][col] = 1
+        #     elif G_1_or_m1[1] is True:
+        #         spin[row][col] = -1
+        # # Only 0 --> 1 acceptable
+        # elif dE_0_1 < 0:
+        #     spin[row][col] = 1
+        # # Only 0 --> -1 acceptable
+        # elif dE_0_m1 < 0:
+        #     spin[row][col] = -1
+        # # Probability of transition still occurring due to detailed balance
+        # elif dE_0_1 >= 0 and dE_0_m1 >= 0:
+        #     prob_rand_g = np.random.rand()
+        #     # The probability of both is selected
+        #     if prob_rand_g < prob_g_1 and prob_rand_g < prob_g_m1:
+        #         # Use partition function to find which transition occurs
+        #         G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand_g)
+        #         if G_1_or_m1[0] is True:
+        #             spin[row][col] = 1
+        #         elif G_1_or_m1[1] is True:
+        #             spin[row][col] = -1
+        #     # Probability of 0 --> 1 selected
+        #     elif prob_rand_g < prob_g_1:
+        #         spin[row][col] = 1
+        #     # Probability of 0 --> -1 selected
+        #     elif prob_rand_g < prob_g_m1:
+        #         spin[row][col] = -1
