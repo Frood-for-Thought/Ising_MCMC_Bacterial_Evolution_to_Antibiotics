@@ -211,7 +211,7 @@ for curr_iter in range(5):
         # Determine which values are accepted
         prob_rand = np.random.rand()
         # Both are acceptable
-        if allow_fit == 2:
+        if allow_fit > 1:
             # Use partition function to find which transition occurs
             G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
             if G_1_or_m1[0] is True:
@@ -219,9 +219,6 @@ for curr_iter in range(5):
             elif G_1_or_m1[1] is True:
                 spin[row][col] = -1
         elif allow_fit == 1:
-            for j in fit_bool:
-                if j:
-
             # Only 0 --> 1 acceptable
             if dE_0_1 < 0:
                 spin[row][col] = 1
