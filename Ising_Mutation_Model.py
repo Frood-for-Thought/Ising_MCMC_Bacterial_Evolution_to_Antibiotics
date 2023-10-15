@@ -101,8 +101,7 @@ spin_array_size = np.size(spin)
 print(f"The spin array has {spin_array_size} elements\n")
 numIters = 200 * spin_array_size
 
-# for curr_iter in range(numIters):
-for curr_iter in range(5):
+for curr_iter in range(numIters):
 
     # Pick a random spin in the array "spin"
     linearIndex = np.random.randint(1, spin_array_size)
