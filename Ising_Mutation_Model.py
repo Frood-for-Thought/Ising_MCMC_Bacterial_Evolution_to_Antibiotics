@@ -198,21 +198,25 @@ for curr_iter in range(5):
         dE_0_m1 = (J * neighbours) + Jd - (Jf * neighbours_sqrd) - Jc
         - (J / 2) * one_minus_neighbour * neighbour_spin_product * np.exp(-Jf_max + Jf + 0.095)
 
-        fit_list = [dE_0_1, dE_0_m1]
-        fit_bool = [i < 0 for i in fit_list]
-        allow_fit = sum(fit_bool)
-
         # The probability of growing to 1
         prob_g_1 = np.exp(-(dE_0_1 / kT))
         # The probability of growing to -1
         prob_g_m1 = np.exp(-(dE_0_m1 / kT))
-        prob_list = [prob_g_1, prob_g_m1]
+
+        # The fit_list is one which contains a boolean to determine if the fitness (energy) is negative,
+        # the probability of switching to that state if it is not favorable (due to detailed balance),
+        # and the final spin state.
+        fit_list = [
+            {"bool": dE_0_1 < 0, "prob": prob_g_1, "spin": 1},
+            {"bool": dE_0_m1 < 0, "prob": prob_g_m1, "spin": -1}]
+        allow_fit = sum([i["bool"] for i in fit_list])
 
         # Determine which values are accepted
-        prob_rand = np.random.rand()
         # Both are acceptable
         if allow_fit > 1:
-            # Use partition function to find which transition occurs
+            prob_rand = np.random.rand()
+            # Use partition function to find which transition occurs.
+            prob_list = [j["prob"] for j in fit_list]
             G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
             if G_1_or_m1[0] is True:
                 spin[row][col] = 1
