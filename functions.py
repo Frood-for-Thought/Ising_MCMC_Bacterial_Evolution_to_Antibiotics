@@ -70,13 +70,13 @@ class Ising_Functions:
         # Sort the dictionary so the matrices that will be calculated are at the beginning of the list
         sl = sorted(shift_list, key=lambda x: x["Include"] > 0, reverse=True)
 
-        # Need to create tuple in reverse so that every element is counted as the mutable list is shortened,
-        # (this would not be the case if the list went forwards)
-        # The neighbouring spins are recorded by shifting the entire array so that the neighbouring values are at the
-        # position, (row, col), where the center spin is located
+        # Need to create tuple in reverse so that every element is counted as the mutable list is shortened
+        # for each iteration.
         for i, j in reversed(list(enumerate(sl))):
             # The "Include" variable is 1 to include and 0 to not include
             if j["Include"] > 0:
+                # The neighbouring spins are recorded by shifting the entire array so that the neighbouring values
+                # are at the position, (row, col), where the center spin is located.
                 # Calculate and record information for Matrices A, B, C, or D
                 # Calculate Matrix Shifts
                 if j["Label"] == "A":
