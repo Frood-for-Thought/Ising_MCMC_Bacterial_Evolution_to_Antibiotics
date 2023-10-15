@@ -245,37 +245,3 @@ for curr_iter in range(5):
                 for j in fit_list:
                     if prob_rand_g < j["prob"]:
                         spin = j["spin"]
-
-        # # Determine which values are accepted
-        # prob_rand = np.random.rand()
-        # # Both are acceptable
-        # if dE_0_1 < 0 and dE_0_m1 < 0:
-        #     # Use partition function to find which transition occurs
-        #     G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
-        #     if G_1_or_m1[0] is True:
-        #         spin[row][col] = 1
-        #     elif G_1_or_m1[1] is True:
-        #         spin[row][col] = -1
-        # # Only 0 --> 1 acceptable
-        # elif dE_0_1 < 0:
-        #     spin[row][col] = 1
-        # # Only 0 --> -1 acceptable
-        # elif dE_0_m1 < 0:
-        #     spin[row][col] = -1
-        # # Probability of transition still occurring due to detailed balance
-        # elif dE_0_1 >= 0 and dE_0_m1 >= 0:
-        #     prob_rand_g = np.random.rand()
-        #     # The probability of both is selected
-        #     if prob_rand_g < prob_g_1 and prob_rand_g < prob_g_m1:
-        #         # Use partition function to find which transition occurs
-        #         G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand_g)
-        #         if G_1_or_m1[0] is True:
-        #             spin[row][col] = 1
-        #         elif G_1_or_m1[1] is True:
-        #             spin[row][col] = -1
-        #     # Probability of 0 --> 1 selected
-        #     elif prob_rand_g < prob_g_1:
-        #         spin[row][col] = 1
-        #     # Probability of 0 --> -1 selected
-        #     elif prob_rand_g < prob_g_m1:
-        #         spin[row][col] = -1
