@@ -221,15 +221,13 @@ for curr_iter in range(5):
             for k, l in enumerate(G_1_or_m1):
                 if l:
                     spin[row][col] = fit_list[k]["spin"]
-        elif allow_fit == 1:
-            # Only 0 --> 1 acceptable
-            if dE_0_1 < 0:
-                spin[row][col] = 1
-            # Only 0 --> -1 acceptable
-            else:
-                spin[row][col] = -1
+        # Only one accepted.
+        elif allow_fit > 0:
+            for j in fit_list:
+                if j["bool"]:
+                    spin[row][col] = j["spin"]
         # Probability of transition still occurring due to detailed balance
-        elif allow_fit == 0:
+        else:
             prob_rand_g = np.random.rand()
             # The probability of both is selected
             if prob_rand_g < prob_g_1 and prob_rand_g < prob_g_m1:
