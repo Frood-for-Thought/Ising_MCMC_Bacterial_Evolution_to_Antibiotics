@@ -109,9 +109,7 @@ for curr_iter in range(5):
     # print(f"Random Element Selected Number = {linearIndex}")
 
     # Use the function to find the position of the random spin
-    spin_pos = Ising_Functions(spin, linearIndex, N).fnd_pos()
-    row = spin_pos[0]
-    col = spin_pos[1]
+    row, col = Ising_Functions(spin, linearIndex, N).fnd_pos()
 
     # If there are no spins then the program moves on to the next iteration
     if spin[row][col] == 0:
@@ -147,7 +145,14 @@ for curr_iter in range(5):
         prob_d = np.exp(-dE_1m1_0 / kT)
         # The probability of flipping
         prob_flip = np.exp(-dE_flip / kT)
-        prob_list = [prob_d, prob_flip]
+
+        # The fit_list is one which contains a boolean to determine if the fitness (energy) is negative,
+        # the probability of switching to that state if it is not favorable (due to detailed balance),
+        # and the final spin state.
+        fit_list = [
+            {"bool": dE_1m1_0 < 0, "prob": prob_d, "spin": 0},
+            {"bool": dE_flip < 0, "prob": prob_flip, "spin": -spin[row][col]}]
+        allow_fit = sum([i["bool"] for i in fit_list])
 
         # IT'S A CASSEROLE DOWN THERE
         # This random number selects values in the partition function
