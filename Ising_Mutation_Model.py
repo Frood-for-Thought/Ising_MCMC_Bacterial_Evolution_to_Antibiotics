@@ -230,19 +230,21 @@ for curr_iter in range(5):
         else:
             prob_rand_g = np.random.rand()
             # The probability of both is selected
-            if prob_rand_g < prob_g_1 and prob_rand_g < prob_g_m1:
-                # Use partition function to find which transition occurs
+            # Use transition probabilities from detailed balance to find which transition occurs.
+            allow_prob = sum((prob_rand_g < i["prob"] for i in fit_list))
+            # Both probabilities from detailed balance are selected due to being above the random number selected.
+            if allow_prob > 1:
+                # Use partition function to find which transition occurs.
+                prob_list = [j["prob"] for j in fit_list]
                 G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand_g)
-                if G_1_or_m1[0] is True:
-                    spin[row][col] = 1
-                elif G_1_or_m1[1] is True:
-                    spin[row][col] = -1
-            # Probability of 0 --> 1 selected
-            elif prob_rand_g < prob_g_1:
-                spin[row][col] = 1
-            # Probability of 0 --> -1 selected
-            elif prob_rand_g < prob_g_m1:
-                spin[row][col] = -1
+                for k, l in enumerate(G_1_or_m1):
+                    if l:
+                        spin[row][col] = fit_list[k]["spin"]
+            # Probability of 0 --> 1 selected or Probability of 0 --> -1 selected
+            else:
+                for j in fit_list:
+                    if prob_rand_g < j["prob"]:
+                        spin = j["spin"]
 
         # # Determine which values are accepted
         # prob_rand = np.random.rand()
