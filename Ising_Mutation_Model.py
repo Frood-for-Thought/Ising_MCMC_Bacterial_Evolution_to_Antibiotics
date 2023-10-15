@@ -154,45 +154,40 @@ for curr_iter in range(5):
             {"bool": dE_flip < 0, "prob": prob_flip, "spin": -spin[row][col]}]
         allow_fit = sum([i["bool"] for i in fit_list])
 
-        # IT'S A CASSEROLE DOWN THERE
-        # This random number selects values in the partition function
-        prob_rand = np.random.rand()
         # Determine which values are accepted
-        # Both flip and death are acceptable
-        if dE_flip < 0 and dE_1m1_0 < 0:
-            # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
-            Flip_or_D = Ising_Functions.partition_gillespie(prob_list, prob_rand)
-            # Death occurs
-            if Flip_or_D[0] is True:
-                spin[row][col] = 0
-            # Spin Flip Occurs
-            elif Flip_or_D[1] is True:
-                spin[row][col] = -spin[row][col]
-        # A flip is going to occur
-        elif dE_flip < 0:
-            spin[row][col] = -spin[row][col]
-        # The spin will go to zero
-        elif dE_1m1_0 < 0:
-            spin[row][col] = 0
+        # Both are acceptable
+        if allow_fit > 1:
+            prob_rand = np.random.rand()
+            # Use partition function to find which transition occurs.
+            prob_list = [j["prob"] for j in fit_list]
+            G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand)
+            for k, l in enumerate(G_1_or_m1):
+                if l:
+                    spin[row][col] = fit_list[k]["spin"]
+        # Only one accepted.
+        elif allow_fit > 0:
+            for j in fit_list:
+                if j["bool"]:
+                    spin[row][col] = j["spin"]
         # Probability of transition still occurring due to detailed balance
-        elif dE_flip >= 0 and dE_1m1_0 >= 0:
+        else:
             prob_rand_g = np.random.rand()
             # The probability of both is selected
-            if prob_rand_g < prob_d and prob_rand_g < prob_flip:
-                # Use partition function and 2nd stage of Gillespie Algorithm to find which transition occurs
-                Flip_or_D = Ising_Functions.partition_gillespie(prob_list, prob_rand_g)
-                # Death occurs
-                if Flip_or_D[0] is True:
-                    spin[row][col] = 0
-                # Spin Flip Occurs
-                elif Flip_or_D[1] is True:
-                    spin[row][col] = -spin[row][col]
-            # A flip is selected
-            elif prob_rand_g < prob_flip:
-                spin[row][col] = -spin[row][col]
-            # Death is selected
-            elif prob_rand_g < prob_d:
-                spin[row][col] = 0
+            # Use transition probabilities from detailed balance to find which transition occurs.
+            allow_prob = sum((prob_rand_g < i["prob"] for i in fit_list))
+            # Both probabilities from detailed balance are selected due to being above the random number selected.
+            if allow_prob > 1:
+                # Use partition function to find which transition occurs.
+                prob_list = [j["prob"] for j in fit_list]
+                G_1_or_m1 = Ising_Functions.partition_gillespie(prob_list, prob_rand_g)
+                for k, l in enumerate(G_1_or_m1):
+                    if l:
+                        spin[row][col] = fit_list[k]["spin"]
+            # Probability of 0 --> 1 selected or Probability of 0 --> -1 selected
+            else:
+                for j in fit_list:
+                    if prob_rand_g < j["prob"]:
+                        spin = j["spin"]
 
     else:  # The selected spin is 0
         # Growth: spin = 0 --> 1
