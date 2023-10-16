@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # A MARKOV CHAIN MONTE CARLO (MCMC) METHOD TO DESCRIBE BACTERIAL EVOLUTION USING THE ISING MODEL
 
-# All the parameters are set up for N = 100
+# All the parameters are set up for N = 100.
 kT = 0.2
 N = 100
 
@@ -94,7 +94,6 @@ for curr_iter in range(numIters):
 
     # Pick a random spin in the array "spin"
     linearIndex = np.random.randint(1, spin_array_size)
-    # print(f"Random Element Selected Number = {linearIndex}")
 
     # Use the function to find the position of the random spin
     row, col = Ising_Functions(spin, linearIndex, N).fnd_pos()
@@ -234,7 +233,6 @@ for curr_iter in range(numIters):
                     if prob_rand_g < j["prob"]:
                         spin = j["spin"]
 
-# Show a figure
 fig, axis = plt.subplots(1, 2)
 im1 = axis[0].imshow(Food_Func)
 axis[0].set_title("Food Gradient")
@@ -243,4 +241,3 @@ im2 = axis[1].imshow(Cipro_Func)
 fig.colorbar(im2, ax=axis[1])
 axis[1].set_title("Antibiotic Gradient")
 plt.show()
-exit()
