@@ -174,7 +174,7 @@ for curr_iter in range(numIters):
             else:
                 for j in fit_list:
                     if prob_rand_g < j["prob"]:
-                        spin = j["spin"]
+                        spin[row][col] = j["spin"]
 
     else:  # The selected spin is 0
         # Growth: spin = 0 --> 1
@@ -231,7 +231,7 @@ for curr_iter in range(numIters):
             else:
                 for j in fit_list:
                     if prob_rand_g < j["prob"]:
-                        spin = j["spin"]
+                        spin[row][col] = j["spin"]
 
 fig, axis = plt.subplots(1, 2)
 im1 = axis[0].imshow(Food_Func)
