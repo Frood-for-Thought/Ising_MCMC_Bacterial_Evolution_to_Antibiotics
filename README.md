@@ -6,8 +6,9 @@ in order to describe bacterial populations migrating along food and drug gradien
 rate, the growth rate, death rate, and rate of migration.
 
 ```math
-E = \left( \sum_{k=1}^n a_k b_k \right)^2
+E = \left(-J/2 \sum_{<ij>}^N S_i S_j \right)^2 + 
 ```
+- N are nearest neighbours
 
 Unlike the classic Ising model, the spin values (or demes) for this system can have three different values:
 - A deme which is fixed with a population of wild type bacteria is given a +1. 
