@@ -146,3 +146,50 @@ class Ising_Functions:
             elif R[r - 1] < rand <= R[r]:
                 Cond_list[r] = True
         return Cond_list
+
+    @staticmethod
+    def transition_state(allow_fit, fit_list):
+        """
+        A function to determine which transition is allowed.  The fit_list is selected depending on the previous
+        state the spin was in, and is used to determine which transition is allowed next.
+        :param allow_fit = sum([i["bool"] for i in fit_list])
+        :param fit_list: a list of dictionaries which each contain a boolean to determine if the fitness (energy) is
+        negative, the probability of switching to that state if it is not favorable (due to detailed balance),
+        and the final spin state if that transition is allowed.
+        :return:
+        """
+        if allow_fit > 1:
+            prob_rand = np.random.rand()
+            # Use partition function to select which transition occurs.
+            prob_list = [j["prob"] for j in fit_list]
+            Rnd_Select = Ising_Functions.partition_gillespie(prob_list, prob_rand)
+            for k, l in enumerate(Rnd_Select):
+                if l:
+                    spin = fit_list[k]["spin"]
+        # Only one accepted.
+        elif allow_fit > 0:
+            for j in fit_list:
+                if j["bool"]:
+                    spin = j["spin"]
+        # Probability of transition still occurring due to detailed balance.
+        else:
+            prob_rand_g = np.random.rand()
+            # The probability of both is selected
+            # Use transition probabilities from detailed balance to find which transition occurs.
+            allow_prob = sum((prob_rand_g < i["prob"] for i in fit_list))
+            # Both probabilities from detailed balance are selected due to being above the random number selected.
+            if allow_prob > 1:
+                # Reroll number again to randomize which transition occurs.
+                prob_rand = np.random.rand()
+                # Use partition function to find which transition occurs.
+                prob_list = [j["prob"] for j in fit_list]
+                Rnd_Select = Ising_Functions.partition_gillespie(prob_list, prob_rand)
+                for k, l in enumerate(Rnd_Select):
+                    if l:
+                        spin = fit_list[k]["spin"]
+            # Probability of 0 --> 1 selected or Probability of 0 --> -1 selected
+            else:
+                for j in fit_list:
+                    if prob_rand_g < j["prob"]:
+                        spin = j["spin"]
+        return spin
