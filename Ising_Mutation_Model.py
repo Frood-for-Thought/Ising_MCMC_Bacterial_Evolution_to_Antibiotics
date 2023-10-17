@@ -133,9 +133,9 @@ for curr_iter in range(numIters):
         # The probability of flipping
         prob_flip = np.exp(-dE_flip / kT)
 
-        # The fit_list is one which contains a boolean to determine if the fitness (energy) is negative,
-        # the probability of switching to that state if it is not favorable (due to detailed balance),
-        # and the final spin state.
+        # The fit_list is a list of dictionaries which each contain a boolean to determine if the fitness (energy) is
+        # negative, the probability of switching to that state if it is not favorable (due to detailed balance),
+        # and the final spin state if that transition is allowed.
         fit_list = [
             {"bool": dE_1m1_0 < 0, "prob": prob_d, "spin": 0},
             {"bool": dE_flip < 0, "prob": prob_flip, "spin": -spin[row][col]}]
@@ -192,9 +192,9 @@ for curr_iter in range(numIters):
         # The probability of growing to -1
         prob_g_m1 = np.exp(-(dE_0_m1 / kT))
 
-        # The fit_list is one which contains a boolean to determine if the fitness (energy) is negative,
-        # the probability of switching to that state if it is not favorable (due to detailed balance),
-        # and the final spin state.
+        # The fit_list is a list of dictionaries which each contain a boolean to determine if the fitness (energy) is
+        # negative, the probability of switching to that state if it is not favorable (due to detailed balance),
+        # and the final spin state if that transition is allowed.
         fit_list = [
             {"bool": dE_0_1 < 0, "prob": prob_g_1, "spin": 1},
             {"bool": dE_0_m1 < 0, "prob": prob_g_m1, "spin": -1}]
