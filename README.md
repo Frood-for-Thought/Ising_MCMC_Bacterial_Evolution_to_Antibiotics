@@ -6,7 +6,7 @@ in order to describe bacterial populations migrating along food and drug gradien
 rate, the growth rate, death rate, and rate of migration.
 
 ```math
-E = -J/2 \sum_{i!=j}^N S_i S_j + J_d \sum_{i=1}^A (S_i)^2 - \sum_{i!=j}^N J_f/2*(S_i)^2 (S_j)^2 + \sum_{i=1}^A J_c*S_i
+E = -J/2 \sum_{i \neq j}^N S_i S_j + J_d \sum_{i=1}^A (S_i)^2 - \sum_{i!=j}^N J_f/2*(S_i)^2 (S_j)^2 + \sum_{i=1}^A J_c*S_i
 ```
 - N are nearest neighbours, (N = 4)
 - A are all neighbouring and central spins, (A = 5)
