@@ -6,10 +6,11 @@ in order to describe bacterial populations migrating along food and drug gradien
 rate, the growth rate, death rate, and rate of migration.
 
 ```math
-E = -J/2 \sum_{i \neq j}^N S_i S_j + J_d \sum_{i=1}^A (S_i)^2 - \sum_{i!=j}^N J_f/2*(S_i)^2 (S_j)^2 + \sum_{i=1}^A J_c*S_i
+E = -J/2 \sum_{i \neq j}^N S_i S_j + J_d \sum_{i=1}^L (S_i)^2 - \sum_{i \neq j}^N J_f/2*(S_i)^2 (S_j)^2 + \sum_{i=1}^L J_c*S_i 
+- A[\sum_{i \neq j}^N e^(J_fmax/kT + J_f/kT + 0.095)]
 ```
 - N are nearest neighbours, (N = 4)
-- A are all neighbouring and central spins, (A = 5)
+- L are all neighbouring and central spins, (A = 5)
 
 Unlike the classic Ising model, the spin values (or demes) for this system can have three different values:
 - A deme which is fixed with a population of wild type bacteria is given a +1. 
