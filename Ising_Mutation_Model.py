@@ -114,7 +114,7 @@ for curr_iter in range(numIters):
     # EXCHANGE INTERACTION VALUES
     J = 1.86
     Jd = 5.95
-    Jf = Food_Function[row][col]
+    Jf = Food_Func[row][col]
     Jc = Cipro_Func[row][col]
     Jf_max = Food_Function[0][0]
 
