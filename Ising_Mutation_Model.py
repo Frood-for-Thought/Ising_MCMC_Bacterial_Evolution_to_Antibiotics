@@ -169,11 +169,22 @@ for curr_iter in range(numIters):
         # Select which next state the current spin is allowed to transition towards.
         spin[row][col] = Ising_Functions.allow_transition_state(allow_fit, fit_list)
 
-fig, axis = plt.subplots(1, 2)
-im1 = axis[0].imshow(Food_Func)
-axis[0].set_title("Food Gradient")
-fig.colorbar(im1, ax=axis[0])
-im2 = axis[1].imshow(Cipro_Func)
-fig.colorbar(im2, ax=axis[1])
-axis[1].set_title("Antibiotic Gradient")
-plt.show()
+    Display_Figure = divmod(curr_iter, 100)
+    if Display_Figure[1] == 0:
+        plt.clf()
+        plt.imshow(spin)
+        plt.colorbar(mappable=None, cax=None)
+        plt.pause(0.05)
+        plt.show(block=False)
+
+    if curr_iter == numIters:
+        print(spin)
+
+# fig, axis = plt.subplots(1, 2)
+# im1 = axis[0].imshow(Food_Func)
+# axis[0].set_title("Food Gradient")
+# fig.colorbar(im1, ax=axis[0])
+# im2 = axis[1].imshow(Cipro_Func)
+# fig.colorbar(im2, ax=axis[1])
+# axis[1].set_title("Antibiotic Gradient")
+# plt.show()
