@@ -141,42 +141,8 @@ for curr_iter in range(numIters):
             {"bool": dE_flip < 0, "prob": prob_flip, "spin": -spin[row][col]}]
         allow_fit = sum([i["bool"] for i in fit_list])
 
-        # Determine which values are accepted.
-        # Both are acceptable.
-        if allow_fit > 1:
-            prob_rand = np.random.rand()
-            # Use partition function to select which transition occurs.
-            prob_list = [j["prob"] for j in fit_list]
-            Rnd_Select = Ising_Functions.partition_gillespie(prob_list, prob_rand)
-            for k, l in enumerate(Rnd_Select):
-                if l:
-                    spin[row][col] = fit_list[k]["spin"]
-        # Only one accepted.
-        elif allow_fit > 0:
-            for j in fit_list:
-                if j["bool"]:
-                    spin[row][col] = j["spin"]
-        # Probability of transition still occurring due to detailed balance.
-        else:
-            prob_rand_g = np.random.rand()
-            # The probability of both is selected
-            # Use transition probabilities from detailed balance to find which transition occurs.
-            allow_prob = sum((prob_rand_g < i["prob"] for i in fit_list))
-            # Both probabilities from detailed balance are selected due to being above the random number selected.
-            if allow_prob > 1:
-                # Reroll number again to randomize which transition occurs.
-                prob_rand = np.random.rand()
-                # Use partition function to find which transition occurs.
-                prob_list = [j["prob"] for j in fit_list]
-                Rnd_Select = Ising_Functions.partition_gillespie(prob_list, prob_rand)
-                for k, l in enumerate(Rnd_Select):
-                    if l:
-                        spin[row][col] = fit_list[k]["spin"]
-            # Probability of 0 --> 1 selected or Probability of 0 --> -1 selected
-            else:
-                for j in fit_list:
-                    if prob_rand_g < j["prob"]:
-                        spin[row][col] = j["spin"]
+        # Select which next state the current spin is allowed to transition towards.
+        spin[row][col] = Ising_Functions.allow_transition_state(allow_fit, fit_list)
 
     else:  # The selected spin is 0
         # Growth: spin = 0 --> 1
@@ -200,42 +166,8 @@ for curr_iter in range(numIters):
             {"bool": dE_0_m1 < 0, "prob": prob_g_m1, "spin": -1}]
         allow_fit = sum([i["bool"] for i in fit_list])
 
-        # Determine which values are accepted.
-        # Both are acceptable.
-        if allow_fit > 1:
-            prob_rand = np.random.rand()
-            # Use partition function to select which transition occurs.
-            prob_list = [j["prob"] for j in fit_list]
-            Rnd_Select = Ising_Functions.partition_gillespie(prob_list, prob_rand)
-            for k, l in enumerate(Rnd_Select):
-                if l:
-                    spin[row][col] = fit_list[k]["spin"]
-        # Only one accepted.
-        elif allow_fit > 0:
-            for j in fit_list:
-                if j["bool"]:
-                    spin[row][col] = j["spin"]
-        # Probability of transition still occurring due to detailed balance.
-        else:
-            prob_rand_g = np.random.rand()
-            # The probability of both is selected
-            # Use transition probabilities from detailed balance to find which transition occurs.
-            allow_prob = sum((prob_rand_g < i["prob"] for i in fit_list))
-            # Both probabilities from detailed balance are selected due to being above the random number selected.
-            if allow_prob > 1:
-                # Reroll number again to randomize which transition occurs.
-                prob_rand = np.random.rand()
-                # Use partition function to find which transition occurs.
-                prob_list = [j["prob"] for j in fit_list]
-                Rnd_Select = Ising_Functions.partition_gillespie(prob_list, prob_rand)
-                for k, l in enumerate(Rnd_Select):
-                    if l:
-                        spin[row][col] = fit_list[k]["spin"]
-            # Probability of 0 --> 1 selected or Probability of 0 --> -1 selected
-            else:
-                for j in fit_list:
-                    if prob_rand_g < j["prob"]:
-                        spin[row][col] = j["spin"]
+        # Select which next state the current spin is allowed to transition towards.
+        spin[row][col] = Ising_Functions.allow_transition_state(allow_fit, fit_list)
 
 fig, axis = plt.subplots(1, 2)
 im1 = axis[0].imshow(Food_Func)
