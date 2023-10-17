@@ -144,7 +144,7 @@ for curr_iter in range(numIters):
         allow_fit = sum([i["bool"] for i in fit_list])
 
         # Select which next state the current spin is allowed to transition towards.
-        spin[row][col] = Ising_Functions.allow_transition_state(allow_fit, fit_list)
+        spin[row][col] = Ising_Functions.allow_transition_state(allow_fit, fit_list, spin[row][col])
 
     else:  # The selected spin is 0
         # Growth: spin = 0 --> 1
@@ -169,7 +169,7 @@ for curr_iter in range(numIters):
         allow_fit = sum([i["bool"] for i in fit_list])
 
         # Select which next state the current spin is allowed to transition towards.
-        spin[row][col] = Ising_Functions.allow_transition_state(allow_fit, fit_list)
+        spin[row][col] = Ising_Functions.allow_transition_state(allow_fit, fit_list, spin[row][col])
 
     Display_Figure = divmod(curr_iter, 100)
     if Display_Figure[1] == 0:

@@ -148,7 +148,7 @@ class Ising_Functions:
         return Cond_list
 
     @staticmethod
-    def allow_transition_state(allow_fit, fit_list, spin=0):
+    def allow_transition_state(allow_fit, fit_list, spin):
         """
         A function to determine which transition is allowed.  The fit_list is selected depending on the previous
         state the spin was in, and is used to determine which transition is allowed next.
