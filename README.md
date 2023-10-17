@@ -5,6 +5,10 @@ The program uses a Hamiltonian equation to govern which direction a particular m
 in order to describe bacterial populations migrating along food and drug gradients.  There are several factors descibed in the Hamiltonian which affect the evolutionary 
 rate, the growth rate, death rate, and rate of migration.
 
+```math
+E = \left( \sum_{k=1}^n a_k b_k \right)^2
+```
+
 Unlike the classic Ising model, the spin values (or demes) for this system can have three different values:
 - A deme which is fixed with a population of wild type bacteria is given a +1. 
 - A deme which is absent of any bacteria is given a value of 0. 
