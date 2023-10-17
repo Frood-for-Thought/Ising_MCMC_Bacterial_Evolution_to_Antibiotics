@@ -98,8 +98,6 @@ for curr_iter in range(numIters):
     # Use the function to find the position of the random spin
     row, col = Ising_Functions(spin, linearIndex, N).fnd_pos()
 
-
-
     # GET VALUES FOR THE FITNESS EQUATION
     get_values = Ising_Functions(spin, linearIndex, N).Fitness_Eqn_Val()
     neighbours = get_values[0]
@@ -118,7 +116,7 @@ for curr_iter in range(numIters):
     Jc = Cipro_Func[row][col]
     Jf_max = Food_Function[0][0]
 
-    # SPIN FITNESS
+    # SPIN SWITCH
 
     if spin[row][col] != 0:  # The selected spin is either -1 or 1
 
