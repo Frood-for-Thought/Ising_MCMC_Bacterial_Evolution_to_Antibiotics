@@ -98,9 +98,7 @@ for curr_iter in range(numIters):
     # Use the function to find the position of the random spin
     row, col = Ising_Functions(spin, linearIndex, N).fnd_pos()
 
-    # If there are no spins then the program moves on to the next iteration
-    if spin[row][col] == 0:
-        continue
+
 
     # GET VALUES FOR THE FITNESS EQUATION
     get_values = Ising_Functions(spin, linearIndex, N).Fitness_Eqn_Val()
@@ -108,6 +106,10 @@ for curr_iter in range(numIters):
     neighbours_sqrd = get_values[1]
     one_minus_neighbour = get_values[2]
     neighbour_spin_product = get_values[4]
+
+    # If there are no spins then the program moves on to the next iteration
+    if spin[row][col] == 0 and neighbours == 0:
+        continue
 
     # EXCHANGE INTERACTION VALUES
     J = 1.86
