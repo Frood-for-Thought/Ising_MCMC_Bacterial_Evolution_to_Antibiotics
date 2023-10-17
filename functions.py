@@ -148,10 +148,11 @@ class Ising_Functions:
         return Cond_list
 
     @staticmethod
-    def allow_transition_state(allow_fit, fit_list):
+    def allow_transition_state(allow_fit, fit_list, spin=0):
         """
         A function to determine which transition is allowed.  The fit_list is selected depending on the previous
         state the spin was in, and is used to determine which transition is allowed next.
+        :param spin: return which spin the next state will be.
         :param allow_fit = sum([i["bool"] for i in fit_list])
         :param fit_list: a list of dictionaries which each contain a boolean to determine if the fitness (energy) is
         negative, the probability of switching to that state if it is not favorable (due to detailed balance),
