@@ -173,22 +173,23 @@ for curr_iter in range(numIters):
     if Display_Figure[1] == 0:
         plt.clf()
 
-        plt.subplot(221)
+        plt.subplot(2, 2, 3)
         plt.imshow(Food_Func)
         plt.title("Food Gradient")
         plt.colorbar()
 
-        plt.subplot(222)
+        plt.subplot(2, 2, 4)
         plt.imshow(Cipro_Func)
         plt.title("Food Gradient")
         plt.colorbar()
 
-        plt.subplot(212)
+        plt.subplot(2, 2, 1)
         plt.imshow(spin)
+        plt.title("Bacteria Deme/Spin Grid")
         plt.colorbar(mappable=None, cax=None)
         plt.pause(0.05)
-        plt.title("Bacteria Deme/Spin Grid")
 
+        plt.subplots_adjust(wspace=0.5)
         plt.show(block=False)
 
     if curr_iter == numIters:
