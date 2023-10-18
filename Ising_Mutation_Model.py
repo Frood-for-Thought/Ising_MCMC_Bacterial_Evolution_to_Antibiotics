@@ -180,7 +180,7 @@ for curr_iter in range(numIters):
 
         plt.subplot(2, 2, 4)
         plt.imshow(Cipro_Func)
-        plt.title("Food Gradient")
+        plt.title("Antibiotic Gradient")
         plt.colorbar()
 
         plt.subplot(2, 2, 1)
