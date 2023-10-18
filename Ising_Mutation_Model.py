@@ -172,19 +172,26 @@ for curr_iter in range(numIters):
     Display_Figure = divmod(curr_iter, 100)
     if Display_Figure[1] == 0:
         plt.clf()
+
+        plt.subplot(221)
+        plt.imshow(Food_Func)
+        plt.title("Food Gradient")
+        plt.colorbar()
+
+        plt.subplot(222)
+        plt.imshow(Cipro_Func)
+        plt.title("Food Gradient")
+        plt.colorbar()
+
+        plt.subplot(212)
         plt.imshow(spin)
         plt.colorbar(mappable=None, cax=None)
         plt.pause(0.05)
+        plt.title("Bacteria Deme/Spin Grid")
+
         plt.show(block=False)
 
     if curr_iter == numIters:
         print(spin)
 
-# fig, axis = plt.subplots(1, 2)
-# im1 = axis[0].imshow(Food_Func)
-# axis[0].set_title("Food Gradient")
-# fig.colorbar(im1, ax=axis[0])
-# im2 = axis[1].imshow(Cipro_Func)
-# fig.colorbar(im2, ax=axis[1])
-# axis[1].set_title("Antibiotic Gradient")
-# plt.show()
+
