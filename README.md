@@ -12,7 +12,7 @@ Unlike the classic Ising model, the spin values (or demes) for this system can h
 - A deme which represents a system which has been fixed by mutant bacteria is given a value of -1.
 
 
-The Hamiltonian can be described as:
+The Hamiltonian for a spin selected on the array can be described as:
 
 ```math
 E = -J/2 \sum_{i \neq j}^N S_i S_j + J_d \sum_{i=1}^L (S_i)^2 - \sum_{i \neq j}^N J_f/2*(S_i)^2 (S_j)^2 + \sum_{i=1}^L J_c*S_i
