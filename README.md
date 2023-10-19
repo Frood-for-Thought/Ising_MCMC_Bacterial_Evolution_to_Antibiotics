@@ -23,11 +23,9 @@ E = -J/2 \sum_{i \neq j}^N S_i S_j + J_d \sum_{i=1}^L (S_i)^2 - \sum_{i \neq j}^
 - N are nearest neighbours, (N = 4)
 - L are all neighbouring and central spins, (L = 5)
 - J is the exchange constant to support similar bacterial populations.
-- ```math
-J_d
-``` is the bacterial death term to shift populated areas to empty (+/- 1 to 0).
-- J_f is the food term that's a variable dependent on the position and supports increasing popoulation so long as the food supply is sufficient.
-- J_c is the antibiotic term and the energy changes in relation to the bacterial present.  
+- J<sub>d</sub> is the bacterial death term to shift populated areas to empty (+/- 1 to 0).
+- J<sub>f</sub> is the food term that's a variable dependent on the position and supports increasing popoulation so long as the food supply is sufficient.
+- J<sub>c</sub> is the antibiotic term and the energy changes in relation to the bacterial present.  
 The term supports the growth of mutant bacteria while discouraging the growth of wild-type bacteria.
 - A is food affinity term to support mutant growth by giving it a greater affinity than wild-type.
 - kT is the temperature constant in thermodynamics, but in this case represents the stochastic drive of a gene, (a larger kT causing greater genetic variation).
