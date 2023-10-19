@@ -22,6 +22,8 @@ E = -J/2 \sum_{i \neq j}^N S_i S_j + J_d \sum_{i=1}^L (S_i)^2 - \sum_{i \neq j}^
 ```
 - N are nearest neighbours, (N = 4)
 - L are all neighbouring and central spins, (L = 5)
+- S are the selected spins. (For summations up to N, i are selected spins and j are neighbouring spins. 
+For summations up to L, i are selected spins involving the central spin and its neighbours).
 - J is the exchange constant to support similar bacterial populations.
 - J<sub>d</sub> is the bacterial death term to shift populated areas to empty (+/- 1 to 0).
 - J<sub>f</sub> is the food term that's a variable dependent on the position and supports increasing popoulation so long as the food supply is sufficient.
