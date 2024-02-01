@@ -74,7 +74,7 @@ class Ising_Functions:
         # for each iteration.
         for i, j in reversed(list(enumerate(sl))):
             # The "Include" variable is 1 to include and 0 to not include
-            if j["Include"] > 0:
+            if j["Include"]:
                 # The neighbouring spins are recorded by shifting the entire array so that the neighbouring values
                 # are at the position, (row, col), where the center spin is located.
                 # Calculate and record information for Matrices A, B, C, or D
