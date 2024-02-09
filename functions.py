@@ -178,7 +178,7 @@ class Ising_Functions:
             # The probability of both is selected
             # Use transition probabilities from detailed balance to find which transition occurs.
             allow_prob = sum((prob_rand_g < i["prob"] for i in fit_list))
-            # Both probabilities from detailed balance are selected due to being above the random number selected.
+            # Both probabilities from detailed balance are selected because they are above the random number selected.
             if allow_prob > 1:
                 # Reroll number again to randomize which transition occurs.
                 prob_rand = np.random.rand()
@@ -188,7 +188,7 @@ class Ising_Functions:
                 for k, l in enumerate(Rnd_Select):
                     if l:
                         spin = fit_list[k]["spin"]
-            # Probability of 0 --> 1 selected or Probability of 0 --> -1 selected
+            # Only one probability from detailed balance is selected for being above the random number selected.
             else:
                 for j in fit_list:
                     if prob_rand_g < j["prob"]:
